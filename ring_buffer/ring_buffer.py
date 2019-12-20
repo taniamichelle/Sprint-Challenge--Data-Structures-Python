@@ -18,10 +18,10 @@ class RingBuffer:
         '''
         Adds elements to the buffer.
         '''
-        if self.storage.length == self.capacity:
-            self.storage.remove_from_tail()
-        else:
-            self.storage.add_to_head(item)
+        if self.storage.length == self.capacity:  # if our DLL is at capacity:
+            self.storage.remove_from_tail()  # remove tail item
+        else:   # if there's still space in our DLL:
+            self.storage.add_to_head(item)  # add item to the head of DLL
 
     def get(self):
         '''
@@ -56,5 +56,5 @@ buffer.append('2')
 buffer.append('4')
 buffer.append('t')
 buffer.append('m')
-print('buffer: ', buffer)
+print('buffer: ', buffer.get())
 # print('storage', self.buffer.storage)
