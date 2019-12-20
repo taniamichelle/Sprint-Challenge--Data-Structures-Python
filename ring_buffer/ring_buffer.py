@@ -18,23 +18,23 @@ class RingBuffer:
         '''
         Adds elements to the buffer.
         '''
-        if self.storage.length >= self.capacity:  # if our DLL is at capacity:
-            self.storage.remove_from_tail()  # remove tail item
+        if self.storage.length == self.capacity:  # if our DLL is at capacity:
+            self.storage.remove_from_head()  # remove tail item
         elif self.storage.length < self.capacity:   # if there's still space in our DLL:
-            self.storage.add_to_head(item)  # add item to the head of DLL
+            self.storage.add_to_tail(item)  # add item to the head of DLL
 
     def get(self):
         '''
         Returns all of the elements in the buffer in a list in their given order. It should 
         not return any `None` values in the list even if they are present in the ring buffer.
         '''
-        # Note:  This is the only [] allowed
         list_buffer_contents = []  # initialize empty list
-        self.current = self.storage.tail  # initialize current as the head of the buffer
+        self.current = self.storage.head  # initialize current as the head of the buffer
         while self.current is not None:  # while the element we're on is NOT none:
             # append the value to the empty list
-            list_buffer_contents.append(self.current)
-            self.current = self.current.prev  # move current pointer to next item in DLL
+            list_buffer_contents.append(self.current.value)
+            self.current = self.current.next  # move current pointer to next item in DLL
+            print('list: ', list_buffer_contents, 'current: ', self.current)
         return list_buffer_contents  # return list and exit while loop
 
 # ----------------Stretch Goal-------------------
