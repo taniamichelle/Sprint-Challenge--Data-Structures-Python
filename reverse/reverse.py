@@ -47,10 +47,9 @@ class LinkedList:
         # TO BE COMPLETED
         prev = None  # initialize a previous ("prev") pointer
         current = self.head  # initialize a current pointer as the head of LL
-        next_node = self.next_node
-        while current is not None:
-            next_node = current.next_node
-            current.next_node = prev
-            prev = current
-            current = next_node
-        self.head = prev
+        while current is not None:  # iterate through LL while current is not None:
+            next_node = current.next_node  # store next_node as current's next node
+            current.next_node = prev  # change current's next node from "next_node" to "prev"
+            prev = current  # move prev pointer "forward" one step; reversing
+            current = next_node  # move current pointer "forward" one step; reversing
+        self.head = prev  # set the new head as the previous node; reversing
