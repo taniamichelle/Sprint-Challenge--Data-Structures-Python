@@ -8,11 +8,11 @@ class RingBuffer:
         self.current = None
         self.storage = DoublyLinkedList()  # import DLL
 
-    # def _repr__(self):
-    #     return(f'capacity: {self.capacity}')
+    def _repr__(self):
+        return(f'storage: {self.storage}')
 
     def __str__(self):
-        return self.capacity
+        return f'self.capacity: {self.capacity}, current: {self.current}'
 
     def append(self, item):
         '''
@@ -29,30 +29,32 @@ class RingBuffer:
         not return any `None` values in the list even if they are present in the ring buffer.
         '''
         # Note:  This is the only [] allowed
-        list_buffer_contents = []
-
-        # TODO: Your code here
-
-        # list_buffer_contents.append(element)
-        return list_buffer_contents
+        list_buffer_contents = []  # initialize empty list
+        self.current = self.storage.head  # initialize current as the head of the buffer
+        while self.current is not None:  # while the element we're on is NOT none:
+            # append the value to the empty list
+            list_buffer_contents.append(self.current)
+            self.current = self.current.get()  # move current pointer to next item in DLL
+        return list_buffer_contents  # return list and exit while loop
 
 # ----------------Stretch Goal-------------------
 
 
-class ArrayRingBuffer:
-    def __init__(self, capacity):
-        pass
+# class ArrayRingBuffer:
+#     def __init__(self, capacity):
+#         pass
 
-    def append(self, item):
-        pass
+#     def append(self, item):
+#         pass
 
-    def get(self):
-        pass
+#     def get(self):
+#         pass
 
 
 buffer = RingBuffer(5)
 buffer.append('2')
-buffer.append('5')
+buffer.append('4')
 buffer.append('t')
 buffer.append('m')
 print('buffer: ', buffer)
+# print('storage', self.buffer.storage)
