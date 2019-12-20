@@ -8,19 +8,19 @@ class RingBuffer:
         self.current = None
         self.storage = DoublyLinkedList()  # import DLL
 
-    def _repr__(self):
-        return(f'storage: {self.storage}')
+    # def __repr__(self):
+    #     return(f'self.capacity: {self.capacity}, current: {self.current}')
 
     def __str__(self):
-        return f'self.capacity: {self.capacity}, current: {self.current}'
+        return(f'self.capacity: {self.capacity}, current: {self.current}')
 
     def append(self, item):
         '''
         Adds elements to the buffer.
         '''
-        if self.storage.length == self.capacity:  # if our DLL is at capacity:
+        if self.storage.length >= self.capacity:  # if our DLL is at capacity:
             self.storage.remove_from_tail()  # remove tail item
-        else:   # if there's still space in our DLL:
+        elif self.storage.length < self.capacity:   # if there's still space in our DLL:
             self.storage.add_to_head(item)  # add item to the head of DLL
 
     def get(self):
@@ -30,11 +30,11 @@ class RingBuffer:
         '''
         # Note:  This is the only [] allowed
         list_buffer_contents = []  # initialize empty list
-        self.current = self.storage.head  # initialize current as the head of the buffer
+        self.current = self.storage.tail  # initialize current as the head of the buffer
         while self.current is not None:  # while the element we're on is NOT none:
             # append the value to the empty list
             list_buffer_contents.append(self.current)
-            self.current = self.current.get()  # move current pointer to next item in DLL
+            self.current = self.current.prev  # move current pointer to next item in DLL
         return list_buffer_contents  # return list and exit while loop
 
 # ----------------Stretch Goal-------------------
