@@ -9,16 +9,9 @@ f = open('names_1.txt', 'r')
 names_1 = f.read().split("\n")  # List containing 10000 names
 f.close()
 
-# print('names1: ', names_1)
-
 f = open('names_2.txt', 'r')
 names_2 = f.read().split("\n")  # List containing 10000 names
 f.close()
-
-# print('names2: ', names_2)
-
-duplicates = []
-
 
 # duplicates = []
 # for name_1 in names_1:
@@ -27,16 +20,28 @@ duplicates = []
 #             duplicates.append(name_1)
 
 
-# make tree
-# traverse tree
-# if names_1 contains name from names_2:
-# append name to "duplicates"
-# class NameTree(object):
-#     def __init__(self, names_1):
-#         self.root = self.generate_tree_from_file(names_1)
+duplicates = []  # initialize empty array to hold duplicate names
+# combine both names lists into single list of names
+names = [names_1 + names_2]
+# print('names: ', names)
 
-#     def __str__(self):
-#         return str(self.root)
+# instantiate binary search tree instance from imported BinarySearchTree Class
+name_tree = BinarySearchTree('Names')
+
+# iterate through names list and insert names into name_tree
+for name in names:
+    if len(names) != 0:  # while names array is NOT empty:
+        name_tree.insert(name)  # insert name into tree
+        names[0].pop()  # remove name
+    else:
+        print('updated names list: ', names)
+
+# traverse tree
+name_tree.bft_print(self.name_tree)
+
+# if there are duplicate names:
+
+# append name to "duplicates"
 
 
 end_time = time.time()

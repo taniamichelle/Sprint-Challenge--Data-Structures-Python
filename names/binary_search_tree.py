@@ -89,6 +89,7 @@ class BinarySearchTree:
             self.left.for_each(cb)
 
         # -----------------------DEPTH-FIRST ITERATIVE SOLUTION:-----------------------
+    # def for_each(self, cb):
         # stack = Stack()  # use stack import from top
         # stack.push(self)  # pass in root node
         # while stack.len() > 0:  # keep running loop while there's something in stack
@@ -151,12 +152,12 @@ class BinarySearchTree:
         pass
 
 
-tree = BinarySearchTree(5)
-tree.insert(1)
-# print(tree)
-tree.insert(9)
-tree.insert(8)
-tree.insert(5)
-tree.insert(2)
+# tree = BinarySearchTree(5)
+# tree.insert(1)
+# # print(tree)
+# tree.insert(9)
+# tree.insert(8)
+# tree.insert(5)
+# tree.insert(2)
 
-tree.bft_print(tree)
+# tree.bft_print(tree)
