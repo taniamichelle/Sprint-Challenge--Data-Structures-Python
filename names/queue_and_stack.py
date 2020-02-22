@@ -1,15 +1,8 @@
-"""Each ListNode holds a reference to its previous node
-as well as its next node in the List."""
-
-
 class ListNode:
     def __init__(self, value, prev=None, next=None):
         self.value = value
         self.prev = prev
         self.next = next
-
-    def __repr__(self):
-        return(f'{self.value}')
 
     """Wrap the given value in a ListNode and insert it
     after this node. Note that this node could already
@@ -61,6 +54,7 @@ class DoublyLinkedList:
     def add_to_head(self, value):
         new_node = ListNode(value, None, None)
         self.length += 1
+        #  If the list is empty
         if not self.head and not self.tail:
             self.head = new_node
             self.tail = new_node
@@ -85,6 +79,7 @@ class DoublyLinkedList:
     def add_to_tail(self, value):
         new_node = ListNode(value, None, None)
         self.length += 1
+        #  If the list is empty
         if not self.head and not self.tail:
             self.head = new_node
             self.tail = new_node
@@ -126,8 +121,11 @@ class DoublyLinkedList:
     the node was the head or the tail"""
 
     def delete(self, node):
+        if not self.head and not self.tail:
+            # TODO:  This probably shouldn't happen, handle error
+            return
         self.length -= 1
-        if self.head is self.tail:
+        if self.head == self.tail:
             self.head = None
             self.tail = None
         elif self.head is node:
@@ -142,11 +140,52 @@ class DoublyLinkedList:
     """Returns the highest value currently in the list"""
 
     def get_max(self):
-        max_value = self.head.value
         current = self.head
+        max_value = current.value
         while current is not None:
             if current.value > max_value:
                 max_value = current.value
             current = current.next
 
         return max_value
+
+
+class Queue:
+    def __init__(self):
+        self.size = 0
+        # Why is our DLL a good choice to store our elements?
+        # b/c you're constantly changing the length of the list and
+        # DLL has O(1) insertion and removal
+        self.storage = DoublyLinkedList()
+
+    def enqueue(self, value):
+        self.storage.add_to_tail(value)
+        self.size += 1
+
+    def dequeue(self):
+        if self.size > 0:
+            self.size -= 1
+            return self.storage.remove_from_head()
+
+    def len(self):
+        return self.size
+
+
+class Stack:
+    def __init__(self):
+        self.size = 0  # can remove this because it's built into our storage
+        # Why is our DLL a good choice to store our elements?
+        # b/c we're constantly changing one end of the stack
+        self.storage = DoublyLinkedList()
+
+    def push(self, value):
+        self.size += 1  # can remove this
+        return self.storage.add_to_head(value)
+
+    def pop(self):
+        if self.storage:  # can remove this and line 171
+            self.size -= 1
+            return self.storage.remove_from_head()
+
+    def len(self):
+        return self.size  # return self.storage.__len__()
